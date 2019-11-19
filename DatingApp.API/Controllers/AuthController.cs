@@ -28,11 +28,6 @@ namespace DatingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            // valdiate request
-
-            // Not needed if using ApiController
-            // if (!ModelState.IsValid)
-            //     return BadRequest(ModelState);
 
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
@@ -52,6 +47,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
+
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
