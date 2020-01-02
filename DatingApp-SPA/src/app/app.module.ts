@@ -1,9 +1,3 @@
-import { MemberListResolver } from './_resolvers/member-list.resolver';
-import { UserService } from './_services/user.service';
-import { AuthGuard } from './_guards/auth.guard';
-import { AlertifyService } from './_services/alertify.service';
-import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
@@ -24,6 +18,15 @@ import { appRoutes } from './routes';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AuthService } from './_services/auth.service';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { UserService } from './_services/user.service';
+import { AuthGuard } from './_guards/auth.guard';
+import { AlertifyService } from './_services/alertify.service';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -45,6 +48,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       RegisterComponent,
       MembersListComponent,
       MemberCardComponent,
+      MemberEditComponent,
       ListsComponent,
       MessagesComponent,
       MemberDetailComponent
@@ -70,9 +74,11 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
+      PreventUnsavedChanges,
       UserService,
       MemberDetailResolver,
       MemberListResolver,
+      MemberEditResolver,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
    bootstrap: [
